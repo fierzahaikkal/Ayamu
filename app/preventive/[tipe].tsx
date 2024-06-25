@@ -1,13 +1,12 @@
 import { ChevronDown, ArrowLeft } from '@tamagui/lucide-icons';
-import { useAssets } from 'expo-asset';
 import { Link, useLocalSearchParams } from 'expo-router';
 import { useAtom } from 'jotai';
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, View } from 'react-native';
 import { Button, Image, Accordion, Paragraph, Square, ScrollView, ListItem } from 'tamagui';
 
 import { Container } from '~/components/Container';
-import { Subtitle, Title } from '~/tamagui.config';
+import { Subtitle } from '~/tamagui.config';
 import { jsonDataAtom, selectedTypeAtom } from '~/utils/load-data';
 
 const Page = () => {
@@ -32,12 +31,6 @@ const Page = () => {
   const filteredData = selectedType
     ? data.filter((disease) => disease.tipe === selectedType)
     : null;
-
-  const disImage = filteredData
-    ?.map((data) => {
-      return data.gambar;
-    })
-    .join(',');
 
   type imgType = {
     [key: string]: any;
@@ -113,5 +106,3 @@ const Page = () => {
 };
 
 export default Page;
-
-const styles = StyleSheet.create({});

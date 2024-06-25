@@ -1,9 +1,8 @@
 import { ChevronDown, ArrowLeft } from '@tamagui/lucide-icons';
 import { Link } from 'expo-router';
 import { useAtom } from 'jotai';
-import React, { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
-import { Accordion, Button, Input, Paragraph, ScrollView, Square, TextArea, YStack } from 'tamagui';
+import React from 'react';
+import { Accordion, Button, Paragraph, ScrollView, Square } from 'tamagui';
 
 import { Container } from '~/components/Container';
 import { IDisease } from '~/types/disease';
@@ -52,5 +51,3 @@ const Disease = () => {
 };
 
 export default Disease;
-
-const styles = StyleSheet.create({});

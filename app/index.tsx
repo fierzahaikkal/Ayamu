@@ -1,6 +1,5 @@
-import { Square } from '@tamagui/lucide-icons';
-import { Stack, Link } from 'expo-router';
-import { Button, Circle, Paragraph, YStack, ZStack } from 'tamagui';
+import { Link } from 'expo-router';
+import { Button, Paragraph, YStack, ZStack } from 'tamagui';
 
 import { Container } from '~/components/Container';
 import { Title } from '~/tamagui.config';

@@ -1,4 +1,3 @@
-import { styled } from '@tamagui/core';
 import { YStack } from 'tamagui';
 
 export const Container = ({ children }: { children: React.ReactNode }) => {
