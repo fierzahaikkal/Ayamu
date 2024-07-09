@@ -10,8 +10,11 @@ export const useImagePicker = () => {
       allowsEditing: true,
       quality: 1,
     });
-    if (!result.canceled) {
+
+    if (!result.canceled && result.assets && result.assets[0].uri) {
       setImageUri(result.assets[0].uri);
+    } else {
+      console.error('Image picking was canceled or no assets found');
     }
   };
 
@@ -20,8 +23,11 @@ export const useImagePicker = () => {
       allowsEditing: true,
       quality: 1,
     });
-    if (!result.canceled) {
+
+    if (!result.canceled && result.assets && result.assets[0].uri) {
       setImageUri(result.assets[0].uri);
+    } else {
+      console.error('Image capture was canceled or no assets found');
     }
   };
 

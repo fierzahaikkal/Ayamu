@@ -5,6 +5,7 @@ import React from 'react';
 import { Accordion, Button, Paragraph, ScrollView, Square } from 'tamagui';
 
 import { Container } from '~/components/Container';
+import { Subtitle } from '~/tamagui.config';
 import { IDisease } from '~/types/disease';
 import { jsonDataAtom } from '~/utils/load-data';
 
@@ -18,7 +19,7 @@ const Disease = () => {
             Kembali
           </Button>
         </Link>
-
+        <Subtitle> Informasi Kesehatan</Subtitle>
         {data?.map((disease: IDisease) => (
           <Accordion overflow="hidden" width="$20" type="multiple" gap="$6" key={disease.id}>
             <Accordion.Item value="salmonella">
@@ -35,7 +36,7 @@ const Disease = () => {
               <Accordion.Content exitStyle={{ opacity: 0 }} gap="$4">
                 <Paragraph>{disease.deskripsi}</Paragraph>
                 <Link
-                  href={{ pathname: '/preventive/[tipe]', params: { tipe: disease.tipe } }}
+                  href={{ pathname: '/details/[tipe]', params: { tipe: disease.tipe } }}
                   asChild>
                   <Button alignSelf="center" size="$3">
                     Pelajari lebih lanjut

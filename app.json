@@ -23,7 +23,8 @@
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
-      ]
+      ],
+      ["expo-camera"]
     ],
     "experiments": {
       "typedRoutes": true,
@@ -46,7 +47,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": ["CAMERA", "READ_EXTERNAL_STORAGE"]
+      "permissions": ["READ_EXTERNAL_STORAGE", "CAMERA"]
     }
   }
 }

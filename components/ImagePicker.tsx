@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Button, Image, View } from 'tamagui';
 
 import { useImagePicker } from '~/hooks/useImagePicker';

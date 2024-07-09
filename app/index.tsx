@@ -1,3 +1,5 @@
+import { registerRootComponent } from 'expo';
+import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import { Button, Paragraph, YStack, ZStack } from 'tamagui';
 
@@ -10,6 +12,7 @@ export default function Home() {
     <Container>
       <LoadData />
       <Title>Ayamu!</Title>
+      {/* <Image source={'../assets/images/chicken-logo.jpg'} /> */}
       <ZStack maxWidth={120} maxHeight={100} width={100} flex={1}>
         <YStack fullscreen borderRadius="$4" padding="$2" borderColor="$color" borderWidth={2} />
         <YStack
@@ -31,13 +34,15 @@ export default function Home() {
           padding="$2"
         />
       </ZStack>
-      <Link href={{ pathname: '/details', params: { name: 'Dan' } }} asChild>
-        <Button>Deteksi Penyakit</Button>
+      <Link href={{ pathname: '/detection' }} asChild>
+        <Button>Pindai penyakit</Button>
       </Link>
       <Link href={{ pathname: '/disease' }} asChild>
-        <Button>Daftar Penyakit</Button>
+        <Button>Informasi kesehatan</Button>
       </Link>
       <Paragraph color="$gray10Dark">Version 1.0.0 &#169; Reserved 2024</Paragraph>
     </Container>
   );
 }
+
+registerRootComponent(Home);

@@ -1,7 +1,7 @@
 import { ChevronDown, ArrowLeft } from '@tamagui/lucide-icons';
 import { Link, useLocalSearchParams } from 'expo-router';
 import { useAtom } from 'jotai';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Text, View } from 'react-native';
 import { Button, Image, Accordion, Paragraph, Square, ScrollView, ListItem } from 'tamagui';
 
