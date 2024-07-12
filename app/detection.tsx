@@ -3,14 +3,13 @@ import { useEffect, useState } from 'react';
 import { Text, View } from 'tamagui';
 
 import { ImagePickerComponents } from '~/components/ImagePicker';
-import { Title } from '~/tamagui.config';
+import { Subtitle, Title } from '~/tamagui.config';
 import { imageToTensor } from '~/utils/imageUtils';
 import { loadModel, makePrediction } from '~/utils/load-model';
 
 const Detection: React.FC = () => {
   const [model, setModel] = useState<tf.LayersModel | null>(null);
   const [prediction, setPrediction] = useState<tf.Tensor | null>(null);
-  console.log('Deteksi page');
 
   useEffect(() => {
     const loadTfModel = async () => {
@@ -34,7 +33,7 @@ const Detection: React.FC = () => {
     <View>
       <Title>Detection Page</Title>
       <ImagePickerComponents onImageSelected={handleImageSelected} />
-      {prediction && <Text>Prediction: {prediction.toString()}</Text>}
+      {prediction && <Subtitle>Prediction: {prediction.toString()}</Subtitle>}
     </View>
   );
 };
