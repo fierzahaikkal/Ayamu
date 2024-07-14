@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
-import { Image } from 'react-native';
-import { Button, View } from 'tamagui';
+import React, { useEffect } from 'react';
+import { Button, Image, View } from 'tamagui';
 
 import { useImagePicker } from '~/hooks/useImagePicker';
 
@@ -14,13 +13,12 @@ export const ImagePickerComponents: React.FC<ImagePickerProps> = ({ onImageSelec
   useEffect(() => {
     if (imageUri) {
       onImageSelected(imageUri);
-      console.log(imageUri);
     }
-  }, [imageUri, onImageSelected]);
+  }, [imageUri]);
 
   return (
     <View>
-      {imageUri && <Image source={{ uri: imageUri }} style={{ width: 300, height: 300 }} />}
+      {imageUri && <Image source={{ uri: imageUri }} style={{ width: 200, height: 200 }} />}
       <Button onPress={captureImage}>Foto Objek</Button>
       <Button onPress={pickImage}>Gallery</Button>
     </View>

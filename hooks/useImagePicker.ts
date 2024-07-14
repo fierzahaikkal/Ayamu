@@ -8,26 +8,24 @@ export const useImagePicker = () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
+      aspect: [4, 3],
       quality: 1,
     });
 
-    if (!result.canceled && result.assets && result.assets[0].uri) {
+    if (!result.canceled) {
       setImageUri(result.assets[0].uri);
-    } else {
-      console.error('Image picking was canceled or no assets found');
     }
   };
 
   const captureImage = async () => {
     const result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
+      aspect: [4, 3],
       quality: 1,
     });
 
-    if (!result.canceled && result.assets && result.assets[0].uri) {
+    if (!result.canceled) {
       setImageUri(result.assets[0].uri);
-    } else {
-      console.error('Image capture was canceled or no assets found');
     }
   };
 

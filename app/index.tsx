@@ -1,6 +1,6 @@
 import { registerRootComponent } from 'expo';
-import { Image } from 'expo-image';
 import { Link } from 'expo-router';
+import { Image } from 'react-native';
 import { Button, Paragraph, YStack, ZStack } from 'tamagui';
 
 import { Container } from '~/components/Container';
@@ -12,7 +12,10 @@ export default function Home() {
     <Container>
       <LoadData />
       <Title>Ayamu!</Title>
-      {/* <Image source={'../assets/images/chicken-logo.jpg'} /> */}
+      <Image
+        source={{ uri: '~/assets/images/chicken-logo.jpg' }}
+        style={{ width: 300, height: 300 }}
+      />
       <ZStack maxWidth={120} maxHeight={100} width={100} flex={1}>
         <YStack fullscreen borderRadius="$4" padding="$2" borderColor="$color" borderWidth={2} />
         <YStack
