@@ -1,42 +1,37 @@
 import { Dialog } from '@tamagui/dialog';
-import { X } from '@tamagui/lucide-icons';
+import { ArrowLeft, X } from '@tamagui/lucide-icons';
 import * as tf from '@tensorflow/tfjs';
-import React, { useEffect, useState } from 'react';
-import { Text, View, Button, ScrollView, Sheet, XStack, Unspaced } from 'tamagui';
+import { Link, Redirect, router } from 'expo-router';
+import { useAtom } from 'jotai';
+import React, { useState } from 'react';
+import { Button, ScrollView, XStack, Unspaced } from 'tamagui';
 
 import { ImagePickerComponents } from '~/components/ImagePicker';
-import { Container, Subtitle, Title } from '~/tamagui.config';
+import { Subtitle, Title } from '~/tamagui.config';
+import { Container } from '~/components/Container';
 import { imageToTensor } from '~/utils/imageUtils';
-import { loadModel, makePrediction } from '~/utils/load-model';
+import { makePrediction, modelAtom } from '~/utils/load-model';
 
 const Detection: React.FC = () => {
-  const [model, setModel] = useState<tf.LayersModel | null>(null);
+  const [model] = useAtom(modelAtom);
   const [prediction, setPrediction] = useState<tf.Tensor | null>(null);
+  const [predictedClass, setPredictedClass] = useState<string>('Tidak diketahui');
+  const [predictedType, setPredictedType] = useState<string>('Tidak diketahui');
+  const [accuracy, setAccuracy] = useState<number>(0);
   const [dialogVisible, setDialogVisible] = useState(false);
 
-  useEffect(() => {
-    const loadTfModel = async () => {
-      try {
-        await tf.ready();
-        const loadedModel = await loadModel();
-        setModel(loadedModel);
-        console.log('Model loaded successfully');
-      } catch (error) {
-        console.error('Error loading model:', error);
-      }
-    };
-    loadTfModel();
-  }, []);
+  const diseaseClasses = ['Salmonella', 'Healthy', 'Coccidiosis', 'New Castle Disease'];
+  const diseasetipe = ['salmonella', 'healthy', 'coccidio', 'ncd'];
 
   const handleImageSelected = async (uri: string) => {
     try {
-      console.log('Image URI:', uri);
       if (model) {
         const imageTensor = await imageToTensor(uri);
-        console.log('Image Tensor:', imageTensor);
-        const pred = makePrediction(model, imageTensor);
-        console.log('Prediction:', pred);
-        setPrediction(pred);
+        const { predictedClassIndex, predictionScores } = makePrediction(model, imageTensor);
+
+        setPredictedClass(diseaseClasses[predictedClassIndex]);
+        setPredictedType(diseasetipe[predictedClassIndex]);
+        setAccuracy(predictionScores[predictedClassIndex]);
         setDialogVisible(true);
       } else {
         console.error('Model not loaded yet');
@@ -46,29 +41,17 @@ const Detection: React.FC = () => {
     }
   };
 
-  const handleClosePopup = () => {
+  const navigateToMoreInfo = (tipe: string) => {
     setDialogVisible(false);
+    return router.navigate(`{/details/${tipe}`);
   };
-
-  const navigateToMoreInfo = () => {
-    // Logic to navigate to more information page
-    console.log('Navigating to more information...');
-  };
-
-  const getPredictionInfo = () => {
-    if (prediction) {
-      const predictedClass = prediction.argMax(-1).dataSync()[0];
-      const predictedAccuracy = prediction.max().dataSync()[0];
-      return { predictedClass, predictedAccuracy };
-    }
-    return { predictedClass: 'Unknown', predictedAccuracy: 0 };
-  };
-
-  const { predictedClass, predictedAccuracy } = getPredictionInfo();
 
   return (
     <Container>
-      <Title>Detection Page</Title>
+      <Link href={{ pathname: '/' }} asChild>
+        <Button icon={ArrowLeft}>Kembali</Button>
+      </Link>
+      <Title>Pindai Objek</Title>
       <ImagePickerComponents onImageSelected={handleImageSelected} />
       <Dialog modal open={dialogVisible} onOpenChange={setDialogVisible}>
         <Dialog.Portal>
@@ -94,19 +77,15 @@ const Detection: React.FC = () => {
             ]}
             enterStyle={{ x: 0, y: -20, opacity: 0, scale: 0.9 }}
             exitStyle={{ x: 0, y: 10, opacity: 0, scale: 0.95 }}
-            gap="$4">
-            <Dialog.Title>Prediction Result</Dialog.Title>
-            <Dialog.Description>
-              Class: {predictedClass}
-              Accuracy: {predictedAccuracy.toFixed(2)}
-            </Dialog.Description>
+            gap="$4"
+            paddingTop="$7"
+            width={350}>
+            <Dialog.Title>{predictedClass}</Dialog.Title>
+            <Dialog.Description>Accuracy: {(accuracy * 100).toFixed(2)}%</Dialog.Description>
             <XStack alignSelf="flex-end" gap="$4">
-              <Button onPress={navigateToMoreInfo}>More Information</Button>
-              <Dialog.Close asChild>
-                <Button theme="active" aria-label="Close" onPress={handleClosePopup}>
-                  Close
-                </Button>
-              </Dialog.Close>
+              <Button onPress={() => navigateToMoreInfo(predictedType)}>
+                Pelajari lebih lanjut
+              </Button>
             </XStack>
             <Unspaced>
               <Dialog.Close asChild>

@@ -1,20 +1,9 @@
 import * as tf from '@tensorflow/tfjs';
 import { bundleResourceIO } from '@tensorflow/tfjs-react-native';
-
+import { atom } from 'jotai';
 import { modelWeights } from '~/assets/static/weights';
 
-// class L2Regularizer extends regularizers.L1L2 {
-//   constructor(config: { l2: number }) {
-//     super({ l2: config.l2 });
-//   }
-
-//   static fromConfig(cls: any, config: { l2: number }) {
-//     return new cls(config);
-//   }
-// }
-
-// // Register the custom regularizer
-// tf.serialization.registerClass(L2Regularizer);
+export const modelAtom = atom<tf.LayersModel | null>(null);
 
 export const loadModel = async () => {
   await tf.ready();
@@ -31,5 +20,7 @@ export const loadModel = async () => {
 
 export const makePrediction = (model: tf.LayersModel, inputData: tf.Tensor) => {
   const prediction = model.predict(inputData) as tf.Tensor;
-  return prediction;
+  const predictedClassIndex = prediction.argMax(-1).dataSync()[0];
+  const predictionScores = prediction.dataSync();
+  return { prediction, predictedClassIndex, predictionScores };
 };
