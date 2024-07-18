@@ -89,11 +89,15 @@ const Detection: React.FC = () => {
             width={350}>
             <Dialog.Title>{predictedClass}</Dialog.Title>
             <Dialog.Description>Accuracy: {(accuracy * 100).toFixed(2)}%</Dialog.Description>
-            <Dialog.Description>Pesan: {message}</Dialog.Description>
+            {predictedClass === 'Sehat' && (
+              <Dialog.Description>Pesan: {message}</Dialog.Description>
+            )}
             <XStack alignSelf="flex-end" gap="$4">
-              <Button onPress={() => navigateToMoreInfo(predictedType)}>
-                Pelajari lebih lanjut
-              </Button>
+              {predictedClass !== 'Sehat' && (
+                <Button onPress={() => navigateToMoreInfo(predictedType)}>
+                  Pelajari lebih lanjut
+                </Button>
+              )}
             </XStack>
             <Unspaced>
               <Dialog.Close asChild>
