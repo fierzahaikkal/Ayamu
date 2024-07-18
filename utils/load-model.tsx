@@ -1,13 +1,27 @@
 import * as tf from '@tensorflow/tfjs';
-import '@tensorflow/tfjs-react-native';
+import { bundleResourceIO } from '@tensorflow/tfjs-react-native';
+import { atom } from 'jotai';
 
-export const loadModel = async (modelUrl: string) => {
+import { modelWeights } from '~/assets/static/weights';
+
+export const modelAtom = atom<tf.LayersModel | null>(null);
+
+export const loadModel = async () => {
   await tf.ready();
-  const model = await tf.loadLayersModel(modelUrl);
-  return model;
+  const modelJson = require('~/assets/jsmodel/model.json');
+
+  try {
+    const model = await tf.loadLayersModel(bundleResourceIO(modelJson, modelWeights));
+    return model;
+  } catch (error) {
+    console.error('Error loading model:', error);
+    throw error;
+  }
 };
 
 export const makePrediction = (model: tf.LayersModel, inputData: tf.Tensor) => {
   const prediction = model.predict(inputData) as tf.Tensor;
-  return prediction;
+  const predictedClassIndex = prediction.argMax(-1).dataSync()[0];
+  const predictionScores = prediction.dataSync();
+  return { prediction, predictedClassIndex, predictionScores };
 };
