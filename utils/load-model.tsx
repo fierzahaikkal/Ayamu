@@ -1,6 +1,7 @@
 import * as tf from '@tensorflow/tfjs';
 import { bundleResourceIO } from '@tensorflow/tfjs-react-native';
 import { atom } from 'jotai';
+
 import { modelWeights } from '~/assets/static/weights';
 
 export const modelAtom = atom<tf.LayersModel | null>(null);

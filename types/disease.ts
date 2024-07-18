@@ -3,7 +3,8 @@ export interface IDisease {
   penyakit: string;
   tipe: string;
   gambar: string;
+  caption: string;
   deskripsi: string;
   penyebab: string[];
-  pencegahan: string[];
+  gejala: string[];
 }

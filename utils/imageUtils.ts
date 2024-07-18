@@ -1,5 +1,5 @@
 import * as tf from '@tensorflow/tfjs';
-import { fetch, decodeJpeg } from '@tensorflow/tfjs-react-native';
+import { decodeJpeg } from '@tensorflow/tfjs-react-native';
 import * as FileSystem from 'expo-file-system';
 
 export const imageToTensor = async (uri: string): Promise<tf.Tensor> => {

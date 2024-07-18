@@ -34,7 +34,7 @@ const Disease = () => {
                 )}
               </Accordion.Trigger>
               <Accordion.Content exitStyle={{ opacity: 0 }} gap="$4">
-                <Paragraph>{disease.deskripsi}</Paragraph>
+                <Paragraph>{disease.caption}</Paragraph>
                 <Link
                   href={{ pathname: '/details/[tipe]', params: { tipe: disease.tipe } }}
                   asChild>

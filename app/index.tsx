@@ -1,14 +1,13 @@
+import * as tf from '@tensorflow/tfjs';
 import { registerRootComponent } from 'expo';
 import { Link } from 'expo-router';
-import { Image } from 'react-native';
-import { Button, Paragraph, YStack, ZStack } from 'tamagui';
-import * as tf from '@tensorflow/tfjs';
-
-import { Container } from '~/components/Container';
-import { Title } from '~/tamagui.config';
-import { LoadData } from '~/utils/load-data';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
+import { Image } from 'react-native';
+import { Button, Paragraph } from 'tamagui';
+
+import { Container } from '~/components/Container';
+import { LoadData } from '~/utils/load-data';
 import { loadModel, modelAtom } from '~/utils/load-model';
 
 export default function Home() {
@@ -26,10 +25,9 @@ export default function Home() {
   return (
     <Container>
       <LoadData />
-      <Title>Ayamu</Title>
       <Image
-        source={require('~/assets/images/chicken-logo.jpg')}
-        style={{ width: 300, height: 300 }}
+        source={require('~/assets/images/chicken-logo.png')}
+        style={{ width: 350, height: 350 }}
       />
       <Link href={{ pathname: '/detection' }} asChild>
         <Button>Pindai penyakit</Button>

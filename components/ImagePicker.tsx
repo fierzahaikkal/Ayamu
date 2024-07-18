@@ -1,6 +1,6 @@
+import { Camera, Image as iconImage } from '@tamagui/lucide-icons';
 import React, { useEffect } from 'react';
 import { Button, Image, View, XStack } from 'tamagui';
-import { Camera, Image as iconImage } from '@tamagui/lucide-icons';
 
 import { useImagePicker } from '~/hooks/useImagePicker';
 
@@ -19,7 +19,7 @@ export const ImagePickerComponents: React.FC<ImagePickerProps> = ({ onImageSelec
 
   return (
     <View>
-      {imageUri && <Image source={{ uri: imageUri }} style={{ height: 300, width: 350 }} />}
+      {imageUri && <Image source={{ uri: imageUri }} style={{ height: 350, width: 350 }} />}
       <XStack gap="$3" alignItems="center" justifyContent="center" marginTop="$6">
         <Button onPress={captureImage} icon={Camera}>
           Foto Objek
