@@ -58,7 +58,7 @@ const Detection: React.FC = () => {
       <Link href={{ pathname: '/' }} asChild>
         <Button icon={ArrowLeft}>Kembali</Button>
       </Link>
-      <Title>Pindai Objek</Title>
+      <Subtitle>Periksa ayammu</Subtitle>
       <ImagePickerComponents onImageSelected={handleImageSelected} />
       <Dialog modal open={dialogVisible} onOpenChange={setDialogVisible}>
         <Dialog.Portal>

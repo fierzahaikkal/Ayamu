@@ -30,7 +30,7 @@ export default function Home() {
         style={{ width: 350, height: 350 }}
       />
       <Link href={{ pathname: '/detection' }} asChild>
-        <Button>Pindai penyakit</Button>
+        <Button>Periksa ayam</Button>
       </Link>
       <Link href={{ pathname: '/disease' }} asChild>
         <Button>Informasi kesehatan</Button>
