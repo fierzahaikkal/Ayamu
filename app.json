@@ -23,7 +23,8 @@
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
-      ]
+      ],
+      ["expo-camera"]
     ],
     "experiments": {
       "typedRoutes": true,
@@ -39,14 +40,19 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to take photos.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to upload images.",
+        "NSPhotoLibraryAddUsageDescription": "This app needs access to add photos to your photo library."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": ["CAMERA", "READ_EXTERNAL_STORAGE"]
+      "permissions": ["READ_EXTERNAL_STORAGE", "CAMERA", "WRITE_EXTERNAL_STORAGE", "INTERNET"]
     }
   }
 }

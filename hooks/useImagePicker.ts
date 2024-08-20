@@ -8,8 +8,10 @@ export const useImagePicker = () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
+      aspect: [4, 3],
       quality: 1,
     });
+
     if (!result.canceled) {
       setImageUri(result.assets[0].uri);
     }
@@ -18,8 +20,10 @@ export const useImagePicker = () => {
   const captureImage = async () => {
     const result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
+      aspect: [4, 3],
       quality: 1,
     });
+
     if (!result.canceled) {
       setImageUri(result.assets[0].uri);
     }

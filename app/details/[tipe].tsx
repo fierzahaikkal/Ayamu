@@ -1,9 +1,9 @@
 import { ChevronDown, ArrowLeft } from '@tamagui/lucide-icons';
 import { Link, useLocalSearchParams } from 'expo-router';
 import { useAtom } from 'jotai';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Text, View } from 'react-native';
-import { Button, Image, Accordion, Paragraph, Square, ScrollView, ListItem } from 'tamagui';
+import { Button, Image, Accordion, Paragraph, Square, ScrollView } from 'tamagui';
 
 import { Container } from '~/components/Container';
 import { Subtitle } from '~/tamagui.config';
@@ -59,7 +59,7 @@ const Page = () => {
                   height: 300,
                 }}
               />
-              <Paragraph textAlign="justify" color="$color1">
+              <Paragraph textAlign="justify" alignItems="center" color="$color1">
                 {data.deskripsi}
               </Paragraph>
               <Accordion.Item value="penyebab">
@@ -75,7 +75,7 @@ const Page = () => {
                 </Accordion.Trigger>
                 <Accordion.Content exitStyle={{ opacity: 0 }} gap="$4">
                   {data.penyebab.map((sebab, index) => (
-                    <ListItem key={index}>{sebab}</ListItem>
+                    <Paragraph key={index}>{sebab}</Paragraph>
                   ))}
                 </Accordion.Content>
               </Accordion.Item>
@@ -84,16 +84,16 @@ const Page = () => {
                 <Accordion.Trigger flexDirection="row" justifyContent="space-between">
                   {({ open }: { open: boolean }) => (
                     <>
-                      <Paragraph>Solusi pengobatan</Paragraph>
+                      <Paragraph>Gejala Penyakit</Paragraph>
                       <Square rotate={open ? '180deg' : '0deg'}>
                         <ChevronDown size="$1" />
                       </Square>
                     </>
                   )}
                 </Accordion.Trigger>
-                <Accordion.Content exitStyle={{ opacity: 0 }}>
-                  {data.pencegahan.map((cara, index) => (
-                    <ListItem key={index}>{cara}</ListItem>
+                <Accordion.Content exitStyle={{ opacity: 0 }} gap="$4">
+                  {data.gejala.map((gejala, index) => (
+                    <Paragraph key={index}>{gejala}</Paragraph>
                   ))}
                 </Accordion.Content>
               </Accordion.Item>

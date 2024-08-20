@@ -1,52 +1,118 @@
+import { Dialog } from '@tamagui/dialog';
+import { ArrowLeft, X } from '@tamagui/lucide-icons';
 import * as tf from '@tensorflow/tfjs';
-import React, { useEffect, useState } from 'react';
-import { Text, View } from 'tamagui';
+import { Link, router } from 'expo-router';
+import { useAtom } from 'jotai';
+import React, { useState } from 'react';
+import { Button, ScrollView, XStack, Unspaced } from 'tamagui';
 
+import { Container } from '~/components/Container';
 import { ImagePickerComponents } from '~/components/ImagePicker';
+import { Subtitle, Title } from '~/tamagui.config';
 import { imageToTensor } from '~/utils/imageUtils';
-import { loadModel, makePrediction } from '~/utils/load-model';
+import { makePrediction, modelAtom } from '~/utils/load-model';
 
-const Detection = () => {
-  const [model, setModel] = useState<tf.LayersModel | null>(null);
+const Detection: React.FC = () => {
+  const [model] = useAtom(modelAtom);
   const [prediction, setPrediction] = useState<tf.Tensor | null>(null);
+  const [predictedClass, setPredictedClass] = useState<string>('Tidak diketahui');
+  const [predictedType, setPredictedType] = useState<string>('Tidak diketahui');
+  const [accuracy, setAccuracy] = useState<number>(0);
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [message, setMessage] = useState<string>();
 
-  useEffect(() => {
-    const loadTfModel = async () => {
-      const modelUrl = '../SavedModel-20240624T085806Z-001/jsmodel/model.json';
-      const loadedModel = await loadModel(modelUrl);
-      setModel(loadedModel);
-    };
-    loadTfModel();
-  }, []);
+  const diseaseClasses = ['Coccidiosis', 'Sehat', 'New Castle Disease', 'Salmonella'];
+  const diseasetipe = ['coccidio', 'sehat', 'ncd', 'salmonella'];
 
   const handleImageSelected = async (uri: string) => {
-    if (model) {
-      const imageTensor = await imageToTensor(uri);
-      const pred = makePrediction(model, imageTensor);
-      setPrediction(pred);
+    try {
+      if (model) {
+        const imageTensor = await imageToTensor(uri);
+        const { predictedClassIndex, predictionScores } = makePrediction(model, imageTensor);
+
+        setPredictedClass(diseaseClasses[predictedClassIndex]);
+        setPredictedType(diseasetipe[predictedClassIndex]);
+        setAccuracy(predictionScores[predictedClassIndex]);
+        setDialogVisible(true);
+
+        if (diseasetipe[predictedClassIndex] === 'sehat') {
+          setMessage(
+            'Kondisi ayam baik, tetap jaga kondisi ayam dengan melakukan pengecekan rutin pada ayam dan menjaga kebersihan kandang dan pakan'
+          );
+        }
+      } else {
+        console.error('Model not loaded yet');
+      }
+    } catch (error) {
+      console.error('Error during prediction:', error);
     }
   };
 
-  // if (!permission) {
-  //   // Camera permissions are still loading.
-  //   return null;
-  // }
-
-  // if (!permission.granted) {
-  //   // Camera permissions are not granted yet.
-  //   return (
-  //     <>
-  //       <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
-  //       <Button onPress={requestPermission}>grant permission</Button>
-  //     </>
-  //   );
-  // }
+  const navigateToMoreInfo = (tipe: string) => {
+    setDialogVisible(false);
+    return router.navigate(`/details/${tipe}`);
+  };
 
   return (
-    <View>
+    <Container>
+      <Link href={{ pathname: '/' }} asChild>
+        <Button icon={ArrowLeft}>Kembali</Button>
+      </Link>
+      <Title>Pindai Objek</Title>
       <ImagePickerComponents onImageSelected={handleImageSelected} />
-      {prediction && <Text>Prediction: {prediction.toString()}</Text>}
-    </View>
+      <Dialog modal open={dialogVisible} onOpenChange={setDialogVisible}>
+        <Dialog.Portal>
+          <Dialog.Overlay
+            key="overlay"
+            animation="lazy"
+            opacity={0.5}
+            enterStyle={{ opacity: 0 }}
+            exitStyle={{ opacity: 0 }}
+          />
+          <Dialog.Content
+            bordered
+            elevate
+            key="content"
+            animateOnly={['transform', 'opacity']}
+            animation={[
+              'quick',
+              {
+                opacity: {
+                  overshootClamping: true,
+                },
+              },
+            ]}
+            enterStyle={{ x: 0, y: -20, opacity: 0, scale: 0.9 }}
+            exitStyle={{ x: 0, y: 10, opacity: 0, scale: 0.95 }}
+            gap="$4"
+            paddingTop="$7"
+            width={350}>
+            <Dialog.Title>{predictedClass}</Dialog.Title>
+            <Dialog.Description>Accuracy: {(accuracy * 100).toFixed(2)}%</Dialog.Description>
+            {predictedClass === 'Sehat' && (
+              <Dialog.Description>Pesan: {message}</Dialog.Description>
+            )}
+            <XStack alignSelf="flex-end" gap="$4">
+              {predictedClass !== 'Sehat' && (
+                <Button onPress={() => navigateToMoreInfo(predictedType)}>
+                  Pelajari lebih lanjut
+                </Button>
+              )}
+            </XStack>
+            <Unspaced>
+              <Dialog.Close asChild>
+                <Button position="absolute" top="$3" right="$3" size="$2" circular icon={X} />
+              </Dialog.Close>
+            </Unspaced>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog>
+      {prediction && (
+        <ScrollView>
+          <Subtitle>Prediction: {prediction.toString()}</Subtitle>
+        </ScrollView>
+      )}
+    </Container>
   );
 };
 

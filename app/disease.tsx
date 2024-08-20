@@ -34,9 +34,9 @@ const Disease = () => {
                 )}
               </Accordion.Trigger>
               <Accordion.Content exitStyle={{ opacity: 0 }} gap="$4">
-                <Paragraph>{disease.deskripsi}</Paragraph>
+                <Paragraph>{disease.caption}</Paragraph>
                 <Link
-                  href={{ pathname: '/preventive/[tipe]', params: { tipe: disease.tipe } }}
+                  href={{ pathname: '/details/[tipe]', params: { tipe: disease.tipe } }}
                   asChild>
                   <Button alignSelf="center" size="$3">
                     Pelajari lebih lanjut
