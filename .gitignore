@@ -17,6 +17,8 @@ expo-env.d.ts
 # other
 assets/images/*
 SavedModel*/
+assets/jsmodel/*
+assets/static/weights.js
 
 
 ios

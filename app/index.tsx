@@ -35,7 +35,11 @@ export default function Home() {
         <Button>Deteksi Penyakit</Button>
       </Link>
       <Link href={{ pathname: '/disease' }} asChild>
+<<<<<<< Updated upstream
         <Button>Daftar Penyakit</Button>
+=======
+        <Button>Informasi penyakit</Button>
+>>>>>>> Stashed changes
       </Link>
       <Paragraph color="$gray10Dark">Version 1.0.0 &#169; Reserved 2024</Paragraph>
     </Container>
