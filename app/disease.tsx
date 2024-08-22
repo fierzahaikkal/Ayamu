@@ -19,7 +19,7 @@ const Disease = () => {
             Kembali
           </Button>
         </Link>
-        <Subtitle> Informasi Kesehatan</Subtitle>
+        <Subtitle> Informasi Penyakit</Subtitle>
         {data?.map((disease: IDisease) => (
           <Accordion overflow="hidden" width="$20" type="multiple" gap="$6" key={disease.id}>
             <Accordion.Item value="salmonella">

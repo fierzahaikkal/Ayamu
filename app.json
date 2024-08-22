@@ -13,9 +13,10 @@
       "expo-router",
       [
         "expo-asset",
-
         {
-          "assets": ["./assets/images/"]
+          "assets": [
+            "./assets/images/"
+          ]
         }
       ],
       [
@@ -24,7 +25,9 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ],
-      ["expo-camera"]
+      [
+        "expo-camera"
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
@@ -38,7 +41,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -52,7 +57,22 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": ["READ_EXTERNAL_STORAGE", "CAMERA", "WRITE_EXTERNAL_STORAGE", "INTERNET"]
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.CAMERA",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.INTERNET",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.fierzahaikkal.ayamu"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "fb3fd8f6-3e22-4c3d-b07a-5dd1b0d177b6"
+      }
     }
   }
 }

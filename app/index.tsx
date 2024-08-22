@@ -30,10 +30,10 @@ export default function Home() {
         style={{ width: 350, height: 350 }}
       />
       <Link href={{ pathname: '/detection' }} asChild>
-        <Button>Periksa ayam</Button>
+        <Button>Pindai penyakit</Button>
       </Link>
       <Link href={{ pathname: '/disease' }} asChild>
-        <Button>Informasi kesehatan</Button>
+        <Button>Informasi penyakit</Button>
       </Link>
       <Paragraph color="$gray10Dark">Version 1.0.0 &#169; Reserved 2024</Paragraph>
     </Container>
