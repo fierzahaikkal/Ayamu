@@ -19,7 +19,11 @@ export const ImagePickerComponents: React.FC<ImagePickerProps> = ({ onImageSelec
 
   return (
     <View>
-      {imageUri && <Image source={{ uri: imageUri }} style={{ height: 350, width: 350 }} />}
+      {imageUri ? (
+        <Image source={{ uri: imageUri }} style={{ height: 350, width: 350 }} />
+      ) : (
+        <Image style={{ height: 350, width: 350, backgroundColor: '#d1d1d1' }} />
+      )}
       <XStack gap="$3" alignItems="center" justifyContent="center" marginTop="$6">
         <Button onPress={captureImage} icon={Camera}>
           Foto Objek

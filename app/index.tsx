@@ -33,7 +33,6 @@ export default function Home() {
         <Button>Pindai penyakit</Button>
       </Link>
       <Link href={{ pathname: '/disease' }} asChild>
-        <Button>Daftar Penyakit</Button>
         <Button>Informasi penyakit</Button>
       </Link>
       <Paragraph color="$gray10Dark">Version 1.0.0 &#169; Reserved 2024</Paragraph>

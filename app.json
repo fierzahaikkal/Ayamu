@@ -4,6 +4,7 @@
     "slug": "ayamu",
     "version": "1.0.0",
     "scheme": "ayamu",
+    "sdkVersion": "51.0.0",
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -13,7 +14,6 @@
       "expo-router",
       [
         "expo-asset",
-
         {
           "assets": ["./assets/images/"]
         }
@@ -52,7 +52,28 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": ["READ_EXTERNAL_STORAGE", "CAMERA", "WRITE_EXTERNAL_STORAGE", "INTERNET"]
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.CAMERA",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.INTERNET",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.fierzahaikkal.ayamu"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "fb3fd8f6-3e22-4c3d-b07a-5dd1b0d177b6"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/fb3fd8f6-3e22-4c3d-b07a-5dd1b0d177b6"
     }
   }
 }
