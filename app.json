@@ -2,7 +2,7 @@
   "expo": {
     "name": "ayamu",
     "slug": "ayamu",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "scheme": "ayamu",
     "sdkVersion": "51.0.0",
     "web": {
