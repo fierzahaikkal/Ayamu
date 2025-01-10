@@ -4,6 +4,7 @@
     "slug": "ayamu",
     "version": "1.0.0",
     "scheme": "ayamu",
+    "sdkVersion": "51.0.0",
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -58,10 +59,7 @@
         "android.permission.INTERNET",
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.fierzahaikkal.ayamu",
-      "compileSdkVersion": 51,
-      "targetSdkVersion": 51,
-      "minSdkVersion": 46
+      "package": "com.fierzahaikkal.ayamu"
     },
     "extra": {
       "router": {

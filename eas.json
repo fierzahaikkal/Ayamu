@@ -9,14 +9,23 @@
       "channel": "development"
     },
     "preview": {
+      // "env": {
+      //   "EXPO_USE_FORCE_LEGACY_DEPS": "true"
+      // },
       "distribution": "internal",
-      "channel": "preview"
+      "channel": "preview",
+      "android": {
+        "buildType": "apk"
+      }
     },
     "production": {
       "env": {
         "EXPO_USE_FORCE_LEGACY_DEPS": "true"
       },
-      "channel": "production"
+      "channel": "production",
+      "android": {
+        "buildType": "apk"
+      }
     }
   },
   "submit": {
