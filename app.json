@@ -12,16 +12,20 @@
     },
     "plugins": [
       "expo-router",
-      "expo-build-properties",
       [
-        "expo-asset",
+        "expo-build-properties",
         {
-          "assets": ["./assets/images/"],
           "android": {
             "compileSdkVersion": 33,
             "targetSdkVersion": 33,
             "buildToolsVersion": "33.0.0"
           }
+        }
+      ],
+      [
+        "expo-asset",
+        {
+          "assets": ["./assets/images/"]
         }
       ],
       [
