@@ -16,7 +16,12 @@
       [
         "expo-asset",
         {
-          "assets": ["./assets/images/"]
+          "assets": ["./assets/images/"],
+          "android": {
+            "compileSdkVersion": 33,
+            "targetSdkVersion": 33,
+            "buildToolsVersion": "33.0.0"
+          }
         }
       ],
       [
@@ -46,7 +51,8 @@
         "NSCameraUsageDescription": "This app uses the camera to take photos.",
         "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to upload images.",
         "NSPhotoLibraryAddUsageDescription": "This app needs access to add photos to your photo library."
-      }
+      },
+      "bundleIdentifier": "com.fierzahaikkal.ayamu"
     },
     "android": {
       "adaptiveIcon": {
