@@ -19,6 +19,8 @@ assets/images/*
 assets/jsmodel/*
 assets/static/weights.js
 SavedModel*/
+assets/jsmodel/*
+assets/static/weights.js
 
 
 ios
