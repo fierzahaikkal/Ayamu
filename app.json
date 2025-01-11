@@ -13,7 +13,6 @@
     "plugins": [
       "expo-router",
       [
-        "expo-build-properties",
         {
           "android": {
             "compileSdkVersion": 34,
