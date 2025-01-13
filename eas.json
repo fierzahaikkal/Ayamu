@@ -6,7 +6,11 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal",
-      "channel": "development"
+      "channel": "development",
+      "android": {
+        "gradleCommand": ":app:assembleDebug",
+        "buildType": "apk"
+      }
     },
     "preview": {
       // "env": {
@@ -17,12 +21,17 @@
       "android": {
         "buildType": "apk",
         "gradleCommand": ":app:assembleRelease",
-        "developmentClient": true
+        "developmentClient": true,
+        "withoutCredentials": true
+      },
+      "env": {
+        "APP_ENV": "preview"
       }
     },
     "production": {
       "env": {
-        "EXPO_USE_FORCE_LEGACY_DEPS": "true"
+        "EXPO_USE_FORCE_LEGACY_DEPS": "true",
+        "APP_ENV": "production"
       },
       "channel": "production",
       "android": {
