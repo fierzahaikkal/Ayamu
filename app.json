@@ -4,7 +4,7 @@
     "slug": "ayamu",
     "version": "1.0.1",
     "scheme": "ayamu",
-    "sdkVersion": "51.0.17",
+    "sdkVersion": "51.0.0",
     "web": {
       "bundler": "metro",
       "output": "static",
